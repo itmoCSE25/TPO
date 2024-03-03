@@ -1,10 +1,10 @@
-package org.example.lab1;
+package org.example.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class HashSort {
+public class HashSortService {
 
     public static List<Integer> hashSort(List<Integer> array) {
         if (array.isEmpty()) {

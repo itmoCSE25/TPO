@@ -1,6 +1,6 @@
-package org.example.lab1;
+package org.example.service;
 
-public class ArctgFunction {
+public class ArctgFunctionService {
 
     public static double arctgSeriesExpansion(double x, int n) {
         double result = 0;

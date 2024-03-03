@@ -1,11 +1,12 @@
-package org.example.lab1;
+package org.example.service.service;
 
+import org.example.service.ArctgFunctionService;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ArctgFunctionTest {
+public class ArctgFunctionServiceTest {
     @ParameterizedTest
     @CsvSource({
             "0, 0",
@@ -17,7 +18,7 @@ public class ArctgFunctionTest {
             "-10, -1.4711276743037347"
     })
     public void testArctg(double x, double expected) {
-        double result = ArctgFunction.arctg(x);
+        double result = ArctgFunctionService.arctg(x);
         System.out.println("\nx = "+ x+ "\nresult = "+ result+"\nexpect = "+expected);
         assertEquals(expected, result, 0.003);
     }
