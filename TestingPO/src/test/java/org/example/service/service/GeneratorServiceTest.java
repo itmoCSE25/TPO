@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import org.example.model.Schema;
 import org.example.model.UltimateImp;
+import org.example.model.enums.SchemaType;
 import org.example.service.GeneratorService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GeneratorServiceTest {
 
@@ -35,8 +37,16 @@ public class GeneratorServiceTest {
     @Test
     void testGenerateSchema() {
         assertImpEquals(
-                new UltimateImp("Test name 1_1", 0.7828982258896384),
-                generatorService.generate(new Schema("Test name 1", 1, true))
+                new UltimateImp("Test name 1_1", -1.5),
+                generatorService.generate(new Schema("Test name 1", 1, true, SchemaType.HARD))
+        );
+    }
+
+    @Test
+    void testGenerateUndefinedSchema() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> generatorService.generate(new Schema("Test name 1", 1, true, SchemaType.UNDEFINED))
         );
     }
 
@@ -55,22 +65,22 @@ public class GeneratorServiceTest {
                 Arguments.of(
                         "List with used schema",
                         List.of(
-                                new Schema("Test name 1", 1, true),
-                                new Schema("Test name 2", 10, true),
-                                new Schema("Test name 3", 20, false)
+                                new Schema("Test name 1", 1, true, SchemaType.HARD),
+                                new Schema("Test name 2", 10, true, SchemaType.DEFAULT),
+                                new Schema("Test name 3", 20, false, SchemaType.EASY)
                         ),
                         Map.of(
-                                "Test name 1_1", new UltimateImp("Test name 1_1", 0.7828982258896384),
-                                "Test name 2_10", new UltimateImp("Test name 2_10", 1.4711276743037345)
+                                "Test name 1_1", new UltimateImp("Test name 1_1", -1.5),
+                                "Test name 2_10", new UltimateImp("Test name 2_10", 0)
                         )
                 ),
                 Arguments.of(
                         "Only one schema",
                         List.of(
-                                new Schema("Test name 1", 1, true)
+                                new Schema("Test name 1", 1, true, SchemaType.EASY)
                         ),
                         Map.of(
-                                "Test name 1_1", new UltimateImp("Test name 1_1", 0.7828982258896384)
+                                "Test name 1_1", new UltimateImp("Test name 1_1", 1.5)
                         )
                 )
         );

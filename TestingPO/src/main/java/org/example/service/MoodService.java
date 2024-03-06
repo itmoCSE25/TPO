@@ -10,7 +10,9 @@ import org.example.model.UltimateImp;
 public class MoodService {
 
     public void changeMoodInPlace(Place place, List<UltimateImp> impList) {
-        place.getPersonList().forEach(person -> changePersonMoodLevel(person, impList));
+        place.getPersonList().stream()
+                .filter(Person::isWantToMoodGrade)
+                .forEach(person -> changePersonMoodLevel(person, impList));
     }
 
     private void changePersonMoodLevel(Person person, List<UltimateImp> impList) {

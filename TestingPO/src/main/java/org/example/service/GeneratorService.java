@@ -19,8 +19,22 @@ public class GeneratorService {
 
     private UltimateImp generateBySchema(Schema schema) {
         schema.setNotUsed(false);
-        return new UltimateImp()
-                .setUuid("%s_%d".formatted(schema.getName(), schema.getCountOfVectors()))
-                .setPower(ArctgFunctionService.arctg(schema.getCountOfVectors()));
+        UltimateImp result = new UltimateImp();
+        switch (schema.getSchemaType()) {
+            case DEFAULT -> {
+                result.setPower(0.0);
+            }
+            case EASY -> {
+                result.setPower(1.5 * schema.getCountOfVectors());
+            }
+            case HARD -> {
+                result.setPower(-1.5 * schema.getCountOfVectors());
+            }
+            case UNDEFINED -> {
+                throw new IllegalArgumentException("Undefined type");
+            }
+        }
+        result.setUuid("%s_%d".formatted(schema.getName(), schema.getCountOfVectors()));
+        return result;
     }
 }

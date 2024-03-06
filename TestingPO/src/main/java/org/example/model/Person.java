@@ -1,25 +1,24 @@
 package org.example.model;
 
+import org.example.model.enums.PersonType;
+
 public class Person {
 
     private String name;
     private double moodLevel = 0.0;
 
-    public Person(String name) {
-        this.name = name;
-    }
+    private boolean wantToMoodGrade = false;
+    private PersonType personType;
 
-    public Person(String name, Double moodLevel) {
+    public Person(String name, double moodLevel, boolean wantToMoodGrade, PersonType personType) {
         this.name = name;
         this.moodLevel = moodLevel;
+        this.wantToMoodGrade = wantToMoodGrade;
+        this.personType = personType;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getMoodLevel() {
@@ -27,6 +26,14 @@ public class Person {
     }
 
     public void setMoodLevel(double moodLevel) {
-        this.moodLevel += moodLevel;
+        this.moodLevel += moodLevel * personType.getKoff();
+    }
+
+    public boolean isWantToMoodGrade() {
+        return wantToMoodGrade;
+    }
+
+    public PersonType getPersonType() {
+        return personType;
     }
 }

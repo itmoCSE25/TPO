@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import org.example.model.Person;
 import org.example.model.Place;
 import org.example.model.UltimateImp;
+import org.example.model.enums.PersonType;
 import org.example.service.MoodService;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -37,43 +38,43 @@ class MoodServiceTest {
     private void assertPersonEquals(Person expected, Person actual) {
         assertEquals(expected.getMoodLevel(), actual.getMoodLevel());
         assertEquals(expected.getName(), actual.getName());
+        assertEquals(expected.getPersonType(), actual.getPersonType());
+        assertEquals(expected.isWantToMoodGrade(), actual.isWantToMoodGrade());
     }
 
     private static Stream<Arguments> changeMoodInPlaceSource() {
         return Stream.of(
                 Arguments.of(
                         "Empty place and imps",
-                        new Place(List.of(), 10),
+                        new Place(List.of()),
                         List.of(),
                         Map.of()
                 ),
                 Arguments.of(
                         "Empty imps, not empty place",
                         new Place(
-                                List.of(new Person("test name")),
-                                10
+                                List.of(new Person("test name", 1.0, true, PersonType.HOLERIC))
                         ),
                         List.of(),
                         Map.of(
-                                "test name", new Person("test name", 0.0)
+                                "test name", new Person("test name", 1.0, true, PersonType.HOLERIC)
                         )
                 ),
                 Arguments.of(
                         "Default",
                         new Place(
                                 List.of(
-                                        new Person("Test name 1", 1.0),
-                                        new Person("Test name 2", 2.5)
-                                ),
-                                10
+                                        new Person("Test name 1", 1.0, false, PersonType.HOLERIC),
+                                        new Person("Test name 2", 1.0, true, PersonType.SANGVINIC)
+                                )
                         ),
                         List.of(
                                 new UltimateImp("_", 1.5),
                                 new UltimateImp("_", 2.5)
                         ),
                         Map.of(
-                                "Test name 1", new Person("Test name 1", 2.5),
-                                "Test name 2", new Person("Test name 2", 5.0)
+                                "Test name 1", new Person("Test name 1", 1.0, false, PersonType.HOLERIC),
+                                "Test name 2", new Person("Test name 2", 7.0, true, PersonType.SANGVINIC)
                         )
                 )
         );
