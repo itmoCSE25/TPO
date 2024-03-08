@@ -80,6 +80,23 @@ class MoodServiceTest {
                                 new Person("Person 1", PersonType.SANGVINIC, 100.0),
                                 new Person("Person 1", PersonType.FLIGMATIC, 31.0)
                         ))
+                ),
+                Arguments.of(
+                        "Empty ImpList",
+                        new Place("Place 1", List.of(
+                                new Person("Person 1", PersonType.SANGVINIC, -1.0),
+                                new Person("Person 1", PersonType.FLIGMATIC, 1.0)
+                        )),
+                        List.of(
+                                new UltimateImp("Name 1", 10.0),
+                                new UltimateImp("Name 3", 25.0)
+                        ),
+                        10.0,
+                        PreferredPerson.WITH_LOW_MOOD,
+                        new Place("Place 1", List.of(
+                                new Person("Person 1", PersonType.SANGVINIC, 39.0),
+                                new Person("Person 1", PersonType.FLIGMATIC, 76.0)
+                        ))
                 )
         );
     }
