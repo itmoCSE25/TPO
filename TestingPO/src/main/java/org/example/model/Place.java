@@ -7,7 +7,8 @@ public class Place {
     private String placeName;
     private List<Person> personList;
 
-    public Place(List<Person> personList) {
+    public Place(String placeName, List<Person> personList) {
+        this.placeName = placeName;
         this.personList = personList;
     }
 

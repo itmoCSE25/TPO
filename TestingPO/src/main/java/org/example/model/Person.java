@@ -1,5 +1,7 @@
 package org.example.model;
 
+import java.util.Objects;
+
 import org.example.model.enums.PersonType;
 
 public class Person {
@@ -9,6 +11,12 @@ public class Person {
     private PersonType personType;
 
     private Double moodLevel = 0.0;
+
+    public Person(String name, PersonType personType, Double moodLevel) {
+        this.name = name;
+        this.personType = personType;
+        this.moodLevel = moodLevel;
+    }
 
     public String getName() {
         return name;
@@ -36,5 +44,25 @@ public class Person {
 
     public void upMoodLevel(Double moodLevel) {
         this.moodLevel += moodLevel * personType.getKoff();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Person person = (Person) o;
+
+        if (!Objects.equals(name, person.name)) {
+            return false;
+        }
+        if (personType != person.personType) {
+            return false;
+        }
+        return Objects.equals(moodLevel, person.moodLevel);
     }
 }
