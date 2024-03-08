@@ -5,35 +5,36 @@ import org.example.model.enums.PersonType;
 public class Person {
 
     private String name;
-    private double moodLevel = 0.0;
 
-    private boolean wantToMoodGrade = false;
     private PersonType personType;
 
-    public Person(String name, double moodLevel, boolean wantToMoodGrade, PersonType personType) {
-        this.name = name;
-        this.moodLevel = moodLevel;
-        this.wantToMoodGrade = wantToMoodGrade;
-        this.personType = personType;
-    }
+    private Double moodLevel = 0.0;
 
     public String getName() {
         return name;
     }
 
-    public double getMoodLevel() {
-        return moodLevel;
-    }
-
-    public void setMoodLevel(double moodLevel) {
-        this.moodLevel += moodLevel * personType.getKoff();
-    }
-
-    public boolean isWantToMoodGrade() {
-        return wantToMoodGrade;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public PersonType getPersonType() {
         return personType;
+    }
+
+    public void setPersonType(PersonType personType) {
+        this.personType = personType;
+    }
+
+    public Double getMoodLevel() {
+        return moodLevel;
+    }
+
+    public void setMoodLevel(Double moodLevel) {
+        this.moodLevel = moodLevel;
+    }
+
+    public void upMoodLevel(Double moodLevel) {
+        this.moodLevel += moodLevel * personType.getKoff();
     }
 }

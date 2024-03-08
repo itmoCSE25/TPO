@@ -1,25 +1,30 @@
 package org.example.model;
 
+import java.util.Objects;
+
 public class UltimateImp {
 
-    private String uuid;
+    private String name;
     private double power;
     private boolean isUsed = false;
 
-    public UltimateImp(String uuid, double power) {
-        this.uuid = uuid;
+    public UltimateImp(String name, double power) {
+        this.name = name;
         this.power = power;
     }
 
-    public UltimateImp() {
+    public UltimateImp(String name, double power, boolean isUsed) {
+        this.name = name;
+        this.power = power;
+        this.isUsed = isUsed;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getName() {
+        return name;
     }
 
-    public UltimateImp setUuid(String uuid) {
-        this.uuid = uuid;
+    public UltimateImp setName(String name) {
+        this.name = name;
         return this;
     }
 
@@ -38,5 +43,25 @@ public class UltimateImp {
 
     public void setUsed(boolean used) {
         isUsed = used;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        UltimateImp that = (UltimateImp) o;
+
+        if (Double.compare(that.power, power) != 0) {
+            return false;
+        }
+        if (isUsed != that.isUsed) {
+            return false;
+        }
+        return Objects.equals(name, that.name);
     }
 }

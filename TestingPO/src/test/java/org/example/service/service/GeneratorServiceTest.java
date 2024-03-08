@@ -1,11 +1,16 @@
 package org.example.service.service;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
 import org.example.model.Schema;
 import org.example.model.UltimateImp;
+import org.example.model.Vector;
+import org.example.model.enums.ImpType;
+import org.example.model.enums.OrientationType;
 import org.example.model.enums.SchemaType;
 import org.example.service.GeneratorService;
 import org.junit.jupiter.api.Test;
@@ -13,74 +18,83 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class GeneratorServiceTest {
 
-    private final GeneratorService generatorService = new GeneratorService();
+    @Test
+    void emptyQueueTest() {
+        GeneratorService generatorService = new GeneratorService(new ArrayDeque<>());
+        assertNull(generatorService.generateNewImpWithType(ImpType.SIMPLE));
+    }
 
-    @ParameterizedTest
-    @MethodSource("schemasSource")
-    void testGenerateSchemas(
-            @SuppressWarnings("unused")
-            String name,
-            List<Schema> schemaList,
-            Map<String, UltimateImp> expected
+    @ParameterizedTest(name = "{index}: {0}")
+    @MethodSource("notEmptyQueueSource")
+    void notEmptyQueueTest(
+            String description,
+            ArrayDeque<Schema> schemaDeque,
+            ImpType impType,
+            List<UltimateImp> expectedImps
     ) {
-        generatorService.generate(schemaList)
-                .forEach(imp -> assertImpEquals(expected.get(imp.getUuid()), imp));
-        schemaList.forEach(schema -> assertFalse(schema.isNotUsed()));
+        GeneratorService generatorService = new GeneratorService(schemaDeque);
+        List<UltimateImp> impList = new ArrayList<>();
+        do {
+            UltimateImp generatedImp = generatorService.generateNewImpWithType(impType);
+            if (generatedImp == null) {
+                break;
+            }
+            impList.add(generatedImp);
+        } while (true);
+        assertIterableEquals(expectedImps, impList);
     }
 
-    @Test
-    void testGenerateSchema() {
-        assertImpEquals(
-                new UltimateImp("Test name 1_1", -1.5),
-                generatorService.generate(new Schema("Test name 1", 1, true, SchemaType.HARD))
-        );
-    }
-
-    @Test
-    void testGenerateUndefinedSchema() {
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> generatorService.generate(new Schema("Test name 1", 1, true, SchemaType.UNDEFINED))
-        );
-    }
-
-    private void assertImpEquals(UltimateImp expected, UltimateImp actual) {
-        assertEquals(expected.getPower(), actual.getPower());
-        assertEquals(expected.getUuid(), actual.getUuid());
-    }
-
-    private static Stream<Arguments> schemasSource() {
+    private static Stream<Arguments> notEmptyQueueSource() {
         return Stream.of(
                 Arguments.of(
-                        "Empty list",
-                        List.of(),
-                        Map.of()
-                ),
-                Arguments.of(
-                        "List with used schema",
+                        "Default input",
+                        new ArrayDeque<>(List.of(
+                                new Schema(
+                                        "Name 1",
+                                        List.of(),
+                                        SchemaType.EASY
+                                ),
+                                new Schema(
+                                        "Name 2",
+                                        List.of(
+                                                new Vector(1, 10.0, OrientationType.OPPOSITE),
+                                                new Vector(2, 12.0, OrientationType.OPPOSITE),
+                                                new Vector(3, 10.0, OrientationType.OPPOSITE)
+                                        ),
+                                        SchemaType.EASY
+                                ),
+                                new Schema(
+                                        "Name 3",
+                                        List.of(
+                                                new Vector(1, 15.0, OrientationType.DIRECT),
+                                                new Vector(2, 10.0, OrientationType.OPPOSITE)
+                                        ),
+                                        SchemaType.DEFAULT
+                                ),
+                                new Schema(
+                                        "Name 4",
+                                        List.of(
+                                                new Vector(1, 40.0, OrientationType.DIRECT),
+                                                new Vector(2, 13.0, OrientationType.DIRECT)
+                                        ),
+                                        SchemaType.HARD
+                                )
+                        )),
+                        ImpType.SIMPLE,
                         List.of(
-                                new Schema("Test name 1", 1, true, SchemaType.HARD),
-                                new Schema("Test name 2", 10, true, SchemaType.DEFAULT),
-                                new Schema("Test name 3", 20, false, SchemaType.EASY)
-                        ),
-                        Map.of(
-                                "Test name 1_1", new UltimateImp("Test name 1_1", -1.5),
-                                "Test name 2_10", new UltimateImp("Test name 2_10", 0)
-                        )
-                ),
-                Arguments.of(
-                        "Only one schema",
-                        List.of(
-                                new Schema("Test name 1", 1, true, SchemaType.EASY)
-                        ),
-                        Map.of(
-                                "Test name 1_1", new UltimateImp("Test name 1_1", 1.5)
+                                new UltimateImp("Name 1_0", 0.0, false),
+                                new UltimateImp("Name 2_1", 3.162, false),
+                                new UltimateImp("Name 2_2", 3.464, false),
+                                new UltimateImp("Name 2_3", 3.162, false),
+                                new UltimateImp("Name 3_4", 3.873, false),
+                                new UltimateImp("Name 3_5", 3.162, false),
+                                new UltimateImp("Name 4_6", 6.325, false),
+                                new UltimateImp("Name 4_7", 3.606, false)
                         )
                 )
         );
