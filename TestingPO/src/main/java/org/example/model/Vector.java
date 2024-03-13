@@ -20,23 +20,7 @@ public class Vector {
         return weight;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public OrientationType getOrientationType() {
-        return orientationType;
-    }
-
-    public void setOrientationType(OrientationType orientationType) {
-        this.orientationType = orientationType;
-    }
-
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

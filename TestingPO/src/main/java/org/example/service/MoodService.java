@@ -3,18 +3,14 @@ package org.example.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.example.model.Clothes;
 import org.example.model.Person;
 import org.example.model.Place;
 import org.example.model.UltimateImp;
+import org.example.model.enums.ClothesType;
 import org.example.model.enums.PreferredPerson;
 
 public class MoodService {
-
-    private final Double enoughMoodLevel;
-
-    public MoodService(Double enoughMoodLevel) {
-        this.enoughMoodLevel = enoughMoodLevel;
-    }
 
     public void moveImpsInPlace(
             Place place,
@@ -28,14 +24,31 @@ public class MoodService {
             return;
         }
         while (!impList.isEmpty() || personList.size() < personIdx) {
-            Person person = personList.get(personIdx);
-            if (person.getMoodLevel() > enoughMoodLevel) {
+            if (!upPersonMoodLevel(personList.get(personIdx), impList.get(0))) {
                 personIdx++;
-                continue;
             }
-            person.upMoodLevel(impList.get(0).getPower());
             impList.remove(0);
         }
+    }
+
+    private boolean upPersonMoodLevel(Person person, UltimateImp ultimateImp) {
+        if (!doesPersonWearUnderwear(person)) {
+            return false;
+        }
+        person.upMoodLevel(ultimateImp.getPower());
+        if (person.getMoodLevel() >= person.getEnoughMoodLevel()) {
+            person.loseUnderwear();
+        }
+        return true;
+    }
+
+    private boolean doesPersonWearUnderwear(Person person) {
+        for (Clothes clothes : person.getClothesList()) {
+            if (clothes.getClothesType() == ClothesType.UNDERWEAR) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

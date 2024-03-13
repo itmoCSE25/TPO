@@ -20,23 +20,11 @@ public class Schema{
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public List<Vector> getVectorList() {
         return vectorList;
     }
 
     public void setVectorList(List<Vector> vectorList) {
         this.vectorList = vectorList;
-    }
-
-    public SchemaType getSchemaType() {
-        return schemaType;
-    }
-
-    public void setSchemaType(SchemaType schemaType) {
-        this.schemaType = schemaType;
     }
 }

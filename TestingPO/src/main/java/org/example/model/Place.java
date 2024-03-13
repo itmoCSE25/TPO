@@ -19,12 +19,4 @@ public class Place {
     public String getPlaceName() {
         return placeName;
     }
-
-    public void setPlaceName(String placeName) {
-        this.placeName = placeName;
-    }
-
-    public void setPersonList(List<Person> personList) {
-        this.personList = personList;
-    }
 }
