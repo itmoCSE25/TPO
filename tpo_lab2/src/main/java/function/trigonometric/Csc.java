@@ -1,7 +1,8 @@
 package function.trigonometric;
 
 public class Csc {
-    public static double calculate(double x) {
-        return 1 / Sin.calculate(x);
+    public double calculate(double x) {
+        Sin sin = new Sin();
+        return 1 / sin.calculate(x);
     }
 }

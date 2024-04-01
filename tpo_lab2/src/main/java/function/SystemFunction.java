@@ -4,7 +4,7 @@ import function.logarifmic.Log;
 import function.trigonometric.*;
 
 public class SystemFunction {
-    public static double calculate(double x, int terms) {
+    public double calculate(double x, int terms) {
         if (x <= 0) {
             return calculateTrigonometric(x);
         } else {
@@ -12,13 +12,25 @@ public class SystemFunction {
         }
     }
 
-    private static double calculateTrigonometric(double x) {
-        double secX = Sec.calculate(x);
-        double cosX = Cos.calculate(x);
-        double cscX = Csc.calculate(x);
-        double cotX = Cot.calculate(x);
-        double tanX = Tan.calculate(x);
-        double sinX = Sin.calculate(x);
+    private double calculateTrigonometric(double x) {
+        Sec sec = new Sec();
+        double secX = sec.calculate(x);
+
+        Cos cos = new Cos();
+        double cosX = cos.calculate(x);
+
+        Csc csc = new Csc();
+        double cscX = csc.calculate(x);
+
+        Cot cot = new Cot();
+        double cotX = cot.calculate(x);
+
+        Tan tan = new Tan();
+        double tanX = tan.calculate(x);
+
+        Sin sin = new Sin();
+        double sinX = sin.calculate(x);
+
 
 
         return Math.pow((((((((((((((((secX + cosX) / cscX) * cscX) * cotX) + cscX) * tanX) / sinX) - cotX) * (sinX / sinX)) / secX) * (tanX * tanX))) +
@@ -30,10 +42,11 @@ public class SystemFunction {
                 (cotX - sinX)))), 2);
     }
 
-    private static double calculateLogarifmic(double x, int terms) {
-        double log5X = Log.calculate(x, 5, terms);
-        double log10X = Log.calculate(x, 10, terms);
-        double log3X = Log.calculate(x, 3, terms);
+    private double calculateLogarifmic(double x, int terms) {
+        Log log = new Log();
+        double log5X = log.calculate(x, 5, terms);
+        double log10X = log.calculate(x, 10, terms);
+        double log3X = log.calculate(x, 3, terms);
 
         return Math.pow((Math.pow((log5X / log5X), 2) + Math.pow(log10X, 2)), 3) + Math.pow(log3X, 2);
     }

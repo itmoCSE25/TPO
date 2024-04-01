@@ -1,7 +1,6 @@
 import function.logarifmic.*;
 import function.trigonometric.*;
 
-
 import java.io.IOException;
 import java.math.BigDecimal;
 
@@ -13,70 +12,72 @@ public class Main {
         final double step = 0.1;
         final int precisionScale = 10;
 
-        WriteCSV.write(
+        WriteCSV csvWriter = new WriteCSV();
+
+        csvWriter.write(
                 "csv/cos.csv",
                 BigDecimal.valueOf(start),
                 BigDecimal.valueOf(end),
                 BigDecimal.valueOf(step),
                 BigDecimal.valueOf(precisionScale));
 
-        WriteCSV.write(
+        csvWriter.write(
                 "csv/sin.csv",
                 BigDecimal.valueOf(start),
                 BigDecimal.valueOf(end),
                 BigDecimal.valueOf(step),
                 BigDecimal.valueOf(precisionScale));
 
-        WriteCSV.write(
+        csvWriter.write(
                 "csv/tan.csv",
                 BigDecimal.valueOf(start),
                 BigDecimal.valueOf(end),
                 BigDecimal.valueOf(step),
                 BigDecimal.valueOf(precisionScale));
 
-        WriteCSV.write(
+        csvWriter.write(
                 "csv/ln.csv",
                 BigDecimal.valueOf(1),
                 BigDecimal.valueOf(20),
                 BigDecimal.valueOf(step),
                 BigDecimal.valueOf(precisionScale));
 
-        WriteCSV.write(
+        csvWriter.write(
                 "csv/log3.csv",
                 BigDecimal.valueOf(1),
                 BigDecimal.valueOf(20),
                 BigDecimal.valueOf(step),
                 BigDecimal.valueOf(precisionScale));
 
-        WriteCSV.write(
+        csvWriter.write(
                 "csv/log5.csv",
                 BigDecimal.valueOf(1),
                 BigDecimal.valueOf(20),
                 BigDecimal.valueOf(step),
                 BigDecimal.valueOf(precisionScale));
 
-        WriteCSV.write(
+        csvWriter.write(
                 "csv/log10.csv",
                 BigDecimal.valueOf(1),
                 BigDecimal.valueOf(20),
                 BigDecimal.valueOf(step),
                 BigDecimal.valueOf(precisionScale));
 
-        WriteCSV.write(
+        csvWriter.write(
                 "csv/csc.csv",
                 BigDecimal.valueOf(start),
                 BigDecimal.valueOf(end),
                 BigDecimal.valueOf(step),
                 BigDecimal.valueOf(precisionScale));
 
-        WriteCSV.write(
+        csvWriter.write(
                 "csv/sec.csv",
                 BigDecimal.valueOf(start),
                 BigDecimal.valueOf(end),
                 BigDecimal.valueOf(step),
                 BigDecimal.valueOf(precisionScale));
 
-        WriteCSV.write(
+        csvWriter.write(
                 "csv/cot.csv",
                 BigDecimal.valueOf(start),
                 BigDecimal.valueOf(end),

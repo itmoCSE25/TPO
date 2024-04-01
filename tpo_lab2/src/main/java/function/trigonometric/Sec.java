@@ -1,7 +1,8 @@
 package function.trigonometric;
 
 public class Sec {
-    public static double calculate(double x) {
-        return 1 / Cos.calculate(x);
+    public double calculate(double x) {
+        Cos cos = new Cos();
+        return 1 / cos.calculate(x);
     }
 }

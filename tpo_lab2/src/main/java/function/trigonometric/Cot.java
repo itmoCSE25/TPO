@@ -1,8 +1,11 @@
 package function.trigonometric;
 
+import function.logarifmic.Ln;
+
 public class Cot {
-    public static double calculate(double x) {
-        return 1 / Tan.calculate(x);
+    public double calculate(double x) {
+        Tan tan = new Tan();
+        return 1 / tan.calculate(x);
 
     }
 }

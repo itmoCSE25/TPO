@@ -1,7 +1,7 @@
 package function.logarifmic;
 
 public class Ln {
-    public static double calculate(double x, int terms) {
+    public double calculate(double x, int terms) {
         if (x <= 0) {
             throw new IllegalArgumentException("ln(x) is undefined for x <= 0");
         }

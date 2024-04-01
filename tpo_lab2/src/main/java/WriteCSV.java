@@ -6,21 +6,18 @@ import java.math.BigDecimal;
 
 public class WriteCSV {
 
-    public static void write(String fileName, BigDecimal start, BigDecimal end, BigDecimal step, BigDecimal precision) throws IOException {
+    public void write(String fileName, BigDecimal start, BigDecimal end, BigDecimal step, BigDecimal precision) throws IOException {
+        SystemFunction systemFunction = new SystemFunction();
+
         try (FileWriter writer = new FileWriter(fileName)) {
             BigDecimal x = start;
             writer.write("X, Result\n");
 
             while (x.compareTo(end) <= 0) {
-                double result = SystemFunction.calculate(x.doubleValue(), 10);
+                double result = systemFunction.calculate(x.doubleValue(), 10);
                 writer.write(x + ", " + result + "\n");
                 x = x.add(step);
             }
         }
     }
-
 }
-
-
-
-

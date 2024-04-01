@@ -1,9 +1,8 @@
 package function.logarifmic;
 
 public class Log {
-    public static double calculate(double x, double base, int terms) {
-        return Ln.calculate(x, terms) / Ln.calculate(base, terms);
+    public double calculate(double x, double base, int terms) {
+        Ln ln = new Ln();
+        return ln.calculate(x, terms) / ln.calculate(base, terms);
     }
 }
-
-
