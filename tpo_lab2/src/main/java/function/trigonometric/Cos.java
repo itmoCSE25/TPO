@@ -1,12 +1,25 @@
 package function.trigonometric;
 
 public class Cos {
+
+    private final Sin sin;
+
+    public Cos(Sin sin) {
+        this.sin = sin;
+    }
+
     public double calculate(double x) {
-        double result = 0;
-        for (int n = 0; n < 10; n++) {
-            result += Math.pow(-1, n) * Math.pow(x, 2 * n) / factorial(2 * n);
+        double temp = x % (2 * Math.PI);
+        if (x < 0) {
+            temp += 2 * Math.PI;
         }
-        return result;
+
+        if (temp > Math.PI / 2 && temp < (Math.PI + Math.PI / 2)) {
+            return -Math.sqrt(1 - Math.pow(sin.calculate(x), 2));
+        } else {
+            double sinSq = Math.pow(sin.calculate(x), 2);
+            return Math.sqrt(1 - sinSq);
+        }
     }
 
     private double factorial(int n) {

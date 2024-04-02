@@ -13,23 +13,23 @@ public class SystemFunction {
     }
 
     private double calculateTrigonometric(double x) {
-        Sec sec = new Sec();
-        double secX = sec.calculate(x);
-
-        Cos cos = new Cos();
-        double cosX = cos.calculate(x);
-
-        Csc csc = new Csc();
-        double cscX = csc.calculate(x);
-
-        Cot cot = new Cot();
-        double cotX = cot.calculate(x);
-
-        Tan tan = new Tan();
-        double tanX = tan.calculate(x);
-
         Sin sin = new Sin();
         double sinX = sin.calculate(x);
+
+        Cos cos = new Cos(sin);
+        double cosX = cos.calculate(x);
+
+        Sec sec = new Sec(cos);
+        double secX = sec.calculate(x);
+
+        Csc csc = new Csc(sin);
+        double cscX = csc.calculate(x);
+
+        Tan tan = new Tan(sin);
+        double tanX = tan.calculate(x);
+
+        Cot cot = new Cot(tan);
+        double cotX = cot.calculate(x);
 
 
 
