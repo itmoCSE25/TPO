@@ -25,11 +25,11 @@ public class CosTest {
         this.cos = new Cos(sin);
     }
 
-    @CsvFileSource(resources = "/data/cos.csv")
+    @CsvFileSource(resources = "/trigonometry/cos.csv")
     @ParameterizedTest
     void cosTest(double x, double y) throws IOException {
         Mockito.when(sin.calculate(x)).thenReturn(
-                ArgumentsProvider.getTestedValue("/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/data/sin.csv",x)
+                ArgumentsProvider.getTestedValue("/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/trigonometry/sin.csv",x)
         );
         assertEquals(y, cos.calculate(x), DEFAULT_ACCURACY);
     }

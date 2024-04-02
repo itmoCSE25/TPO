@@ -2,8 +2,8 @@ package org.example.service.triganomethry;
 
 import java.io.IOException;
 
-import function.trigonometric.Cot;
-import function.trigonometric.Tan;
+import function.trigonometric.Csc;
+import function.trigonometric.Sin;
 import org.example.service.utils.ArgumentsProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,27 +12,27 @@ import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CotTest {
+public class CscTest {
 
     private static Double DEFAULT_ACCURACY = 0.000001;
 
-    private Tan tan;
-    private Cot cot;
+    private Sin sin;
+    private Csc csc;
 
     @BeforeEach
     void init() {
-        this.tan = Mockito.mock(Tan.class);
-        this.cot = new Cot(tan);
+        this.sin = Mockito.mock(Sin.class);
+        this.csc = new Csc(sin);
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/trigonometry/cot.csv")
-    void cotTest(double x, double y) throws IOException {
-        Mockito.when(tan.calculate(x)).thenReturn(
+    @CsvFileSource(resources = "/trigonometry/csc.csv")
+    void cscTest(double x, double y) throws IOException {
+        Mockito.when(sin.calculate(x)).thenReturn(
                 ArgumentsProvider.getTestedValue(
-                        "/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/trigonometry/tan.csv", x
+                        "/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/trigonometry/sin.csv", x
                 )
         );
-        assertEquals(y, cot.calculate(x), DEFAULT_ACCURACY);
+        assertEquals(y, csc.calculate(x), DEFAULT_ACCURACY);
     }
 }

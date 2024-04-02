@@ -25,11 +25,11 @@ public class SecTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/data/csc.csv")
+    @CsvFileSource(resources = "/trigonometry/sec.csv")
     void cscTest(double x, double y) throws IOException {
         Mockito.when(cos.calculate(x)).thenReturn(
                 ArgumentsProvider.getTestedValue(
-                        "/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/data/cos.csv", x
+                        "/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/trigonometry/cos.csv", x
                 )
         );
         assertEquals(y, sec.calculate(x), DEFAULT_ACCURACY);

@@ -20,7 +20,7 @@ public class SinTest {
         sin = new Sin();
     }
 
-    @CsvFileSource(resources = "/data/sin.csv")
+    @CsvFileSource(resources = "/trigonometry/sin.csv")
     @ParameterizedTest
     void sinTest(double x, double y) {
         assertEquals(y, sin.calculate(x), DEFAULT_ACCURACY);

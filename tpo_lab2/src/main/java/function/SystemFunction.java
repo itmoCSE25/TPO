@@ -1,5 +1,6 @@
 package function;
 
+import function.logarifmic.Ln;
 import function.logarifmic.Log;
 import function.trigonometric.*;
 
@@ -43,10 +44,11 @@ public class SystemFunction {
     }
 
     private double calculateLogarifmic(double x, int terms) {
-        Log log = new Log();
-        double log5X = log.calculate(x, 5, terms);
-        double log10X = log.calculate(x, 10, terms);
-        double log3X = log.calculate(x, 3, terms);
+        Ln ln = new Ln();
+        Log log = new Log(ln);
+        double log5X = log.calculate(x, 5);
+        double log10X = log.calculate(x, 10);
+        double log3X = log.calculate(x, 3);
 
         return Math.pow((Math.pow((log5X / log5X), 2) + Math.pow(log10X, 2)), 3) + Math.pow(log3X, 2);
     }

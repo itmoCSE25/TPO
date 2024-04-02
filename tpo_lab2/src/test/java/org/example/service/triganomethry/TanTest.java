@@ -26,10 +26,10 @@ public class TanTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/data/tan.csv")
+    @CsvFileSource(resources = "/trigonometry/tan.csv")
     void tanTest(double x, double y) throws IOException {
-        Mockito.when(tan.calculate(x)).thenReturn(
-                ArgumentsProvider.getTestedValue("/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/data/sin.csv", x)
+        Mockito.when(sin.calculate(x)).thenReturn(
+                ArgumentsProvider.getTestedValue("/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/trigonometry/sin.csv", x)
         );
         assertEquals(y, tan.calculate(x), DEFAULT_ACCURACY);
     }
