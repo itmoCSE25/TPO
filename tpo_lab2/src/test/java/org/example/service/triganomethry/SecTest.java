@@ -3,7 +3,7 @@ package org.example.service.triganomethry;
 import java.io.IOException;
 
 import function.trigonometric.Cos;
-import function.trigonometric.Sin;
+import function.trigonometric.Sec;
 import org.example.service.utils.ArgumentsProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,25 +12,26 @@ import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CosTest {
-
+public class SecTest {
     private static Double DEFAULT_ACCURACY = 0.000001;
 
-    private Sin sin;
     private Cos cos;
+    private Sec sec;
 
     @BeforeEach
     void init() {
-        this.sin = Mockito.mock(Sin.class);
-        this.cos = new Cos(sin);
+        this.cos = Mockito.mock(Cos.class);
+        this.sec = new Sec(cos);
     }
 
-    @CsvFileSource(resources = "/data/cos.csv")
     @ParameterizedTest
-    void cosTest(double x, double y) throws IOException {
-        Mockito.when(sin.calculate(x)).thenReturn(
-                ArgumentsProvider.getTestedValue("/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/data/sin.csv",x)
+    @CsvFileSource(resources = "/data/csc.csv")
+    void cscTest(double x, double y) throws IOException {
+        Mockito.when(cos.calculate(x)).thenReturn(
+                ArgumentsProvider.getTestedValue(
+                        "/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/data/cos.csv", x
+                )
         );
-        assertEquals(y, cos.calculate(x), DEFAULT_ACCURACY);
+        assertEquals(y, sec.calculate(x), DEFAULT_ACCURACY);
     }
 }
