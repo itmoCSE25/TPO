@@ -10,7 +10,6 @@ public class Main {
         final double start = -2;
         final double end = 2;
         final double step = 0.1;
-        final int precisionScale = 10;
 
         WriteCSV csvWriter = new WriteCSV();
 
@@ -19,69 +18,76 @@ public class Main {
                 BigDecimal.valueOf(start),
                 BigDecimal.valueOf(end),
                 BigDecimal.valueOf(step),
-                BigDecimal.valueOf(precisionScale));
+                "cos");
 
         csvWriter.write(
                 "csv/sin.csv",
                 BigDecimal.valueOf(start),
                 BigDecimal.valueOf(end),
                 BigDecimal.valueOf(step),
-                BigDecimal.valueOf(precisionScale));
+                "sin");
 
         csvWriter.write(
                 "csv/tan.csv",
                 BigDecimal.valueOf(start),
                 BigDecimal.valueOf(end),
                 BigDecimal.valueOf(step),
-                BigDecimal.valueOf(precisionScale));
+                "tan");
 
         csvWriter.write(
                 "csv/ln.csv",
                 BigDecimal.valueOf(1),
                 BigDecimal.valueOf(20),
                 BigDecimal.valueOf(step),
-                BigDecimal.valueOf(precisionScale));
+                "ln");
 
         csvWriter.write(
                 "csv/log3.csv",
                 BigDecimal.valueOf(1),
                 BigDecimal.valueOf(20),
                 BigDecimal.valueOf(step),
-                BigDecimal.valueOf(precisionScale));
+                "log3");
 
         csvWriter.write(
                 "csv/log5.csv",
                 BigDecimal.valueOf(1),
                 BigDecimal.valueOf(20),
                 BigDecimal.valueOf(step),
-                BigDecimal.valueOf(precisionScale));
+                "log5");
 
         csvWriter.write(
                 "csv/log10.csv",
                 BigDecimal.valueOf(1),
                 BigDecimal.valueOf(20),
                 BigDecimal.valueOf(step),
-                BigDecimal.valueOf(precisionScale));
+                "log10");
 
         csvWriter.write(
                 "csv/csc.csv",
                 BigDecimal.valueOf(start),
                 BigDecimal.valueOf(end),
                 BigDecimal.valueOf(step),
-                BigDecimal.valueOf(precisionScale));
+                "csc");
 
         csvWriter.write(
                 "csv/sec.csv",
                 BigDecimal.valueOf(start),
                 BigDecimal.valueOf(end),
                 BigDecimal.valueOf(step),
-                BigDecimal.valueOf(precisionScale));
+                "sec");
 
         csvWriter.write(
                 "csv/cot.csv",
                 BigDecimal.valueOf(start),
                 BigDecimal.valueOf(end),
                 BigDecimal.valueOf(step),
-                BigDecimal.valueOf(precisionScale));
+               "cot");
+
+        csvWriter.write(
+                "csv/func.csv",
+                BigDecimal.valueOf(start),
+                BigDecimal.valueOf(end),
+                BigDecimal.valueOf(step),
+                "func");
     }
 }
