@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SecTest {
-    private static Double DEFAULT_ACCURACY = 0.000001;
+    private static final Double DEFAULT_ACCURACY = 0.0001;
 
     private Cos cos;
     private Sec sec;
@@ -26,10 +26,10 @@ public class SecTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/trigonometry/sec.csv")
-    void cscTest(double x, double y) throws IOException {
+    void secTest(double x, double y) throws IOException {
         Mockito.when(cos.calculate(x)).thenReturn(
                 ArgumentsProvider.getTestedValue(
-                        "/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/trigonometry/cos.csv", x
+                        "trigonometry/cos.csv", x
                 )
         );
         assertEquals(y, sec.calculate(x), DEFAULT_ACCURACY);

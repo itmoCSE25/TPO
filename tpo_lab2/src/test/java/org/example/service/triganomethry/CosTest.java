@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CosTest {
 
-    private static Double DEFAULT_ACCURACY = 0.000001;
+    private static final Double DEFAULT_ACCURACY = 0.000001;
 
     private Sin sin;
     private Cos cos;
@@ -29,7 +29,7 @@ public class CosTest {
     @ParameterizedTest
     void cosTest(double x, double y) throws IOException {
         Mockito.when(sin.calculate(x)).thenReturn(
-                ArgumentsProvider.getTestedValue("/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/trigonometry/sin.csv",x)
+                ArgumentsProvider.getTestedValue("trigonometry/sin.csv",x)
         );
         assertEquals(y, cos.calculate(x), DEFAULT_ACCURACY);
     }

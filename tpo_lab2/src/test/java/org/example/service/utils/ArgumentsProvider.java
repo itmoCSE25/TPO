@@ -2,6 +2,7 @@ package org.example.service.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -15,8 +16,13 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 public class ArgumentsProvider {
 
     public static double getTestedValue(String pathFile, double x) throws IOException {
-        File file = new File(pathFile);
-
+        File file;
+        try {
+            URL fileURL = ArgumentsProvider.class.getClassLoader().getResource(pathFile);
+            file = new File(fileURL.toURI());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Can't find file");
+        }
         List<Map<String, Double>> list = read(file);
         for (Map<String, Double> map : list) {
             if (compareWithFormat(map.get("x"), x)) {

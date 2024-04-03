@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LogTest {
 
-    private static Double DEFAULT_ACCURACY = 0.000001;
+    private static final Double DEFAULT_ACCURACY = 0.000001;
 
     private Ln ln;
     private Log log;
@@ -29,10 +29,10 @@ public class LogTest {
     @ParameterizedTest
     void logWithBase3Test(double x, double y) throws IOException {
         Mockito.when(ln.calculate(x)).thenReturn(
-                ArgumentsProvider.getTestedValue("/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/logarithmic/ln.csv",x)
+                ArgumentsProvider.getTestedValue("logarithmic/ln.csv",x)
         );
         Mockito.when(ln.calculate(3)).thenReturn(
-                ArgumentsProvider.getTestedValue("/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/logarithmic/ln.csv",3)
+                ArgumentsProvider.getTestedValue("logarithmic/ln.csv",3)
         );
         assertEquals(y, log.calculate(x, 3), DEFAULT_ACCURACY);
     }
@@ -41,10 +41,10 @@ public class LogTest {
     @ParameterizedTest
     void logWithBase5Test(double x, double y) throws IOException {
         Mockito.when(ln.calculate(x)).thenReturn(
-                ArgumentsProvider.getTestedValue("/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/logarithmic/ln.csv",x)
+                ArgumentsProvider.getTestedValue("logarithmic/ln.csv",x)
         );
         Mockito.when(ln.calculate(5)).thenReturn(
-                ArgumentsProvider.getTestedValue("/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/logarithmic/ln.csv",5)
+                ArgumentsProvider.getTestedValue("logarithmic/ln.csv",5)
         );
         assertEquals(y, log.calculate(x, 5), DEFAULT_ACCURACY);
     }
@@ -53,11 +53,11 @@ public class LogTest {
     @ParameterizedTest
     void logWithBase10Test(double x, double y) throws IOException {
         Mockito.when(ln.calculate(x)).thenReturn(
-                ArgumentsProvider.getTestedValue("/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/logarithmic/ln.csv",x)
+                ArgumentsProvider.getTestedValue("logarithmic/ln.csv",x)
         );
         Mockito.when(ln.calculate(10)).thenReturn(
-                ArgumentsProvider.getTestedValue("/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/logarithmic/ln.csv",10)
+                ArgumentsProvider.getTestedValue("logarithmic/ln.csv",10)
         );
-        assertEquals(y, log.calculate(x, 5), DEFAULT_ACCURACY);
+        assertEquals(y, log.calculate(x, 10), DEFAULT_ACCURACY);
     }
 }

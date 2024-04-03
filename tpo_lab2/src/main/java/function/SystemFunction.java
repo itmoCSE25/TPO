@@ -5,34 +5,42 @@ import function.logarifmic.Log;
 import function.trigonometric.*;
 
 public class SystemFunction {
-    public double calculate(double x, int terms) {
+
+    private final Sin sin;
+    private final Cos cos;
+    private final Sec sec;
+    private final Csc csc;
+    private final Tan tan;
+    private final Cot cot;
+    private final Ln ln;
+    private final Log log;
+
+    public SystemFunction(Sin sin, Cos cos, Sec sec, Csc csc, Tan tan, Cot cot, Ln ln, Log log) {
+        this.sin = sin;
+        this.cos = cos;
+        this.sec = sec;
+        this.csc = csc;
+        this.tan = tan;
+        this.cot = cot;
+        this.ln = ln;
+        this.log = log;
+    }
+
+    public double calculate(double x) {
         if (x <= 0) {
             return calculateTrigonometric(x);
         } else {
-            return calculateLogarifmic(x, terms);
+            return calculateLogarifmic(x);
         }
     }
 
     private double calculateTrigonometric(double x) {
-        Sin sin = new Sin();
         double sinX = sin.calculate(x);
-
-        Cos cos = new Cos(sin);
         double cosX = cos.calculate(x);
-
-        Sec sec = new Sec(cos);
         double secX = sec.calculate(x);
-
-        Csc csc = new Csc(sin);
         double cscX = csc.calculate(x);
-
-        Tan tan = new Tan(sin);
         double tanX = tan.calculate(x);
-
-        Cot cot = new Cot(tan);
         double cotX = cot.calculate(x);
-
-
 
         return Math.pow((((((((((((((((secX + cosX) / cscX) * cscX) * cotX) + cscX) * tanX) / sinX) - cotX) * (sinX / sinX)) / secX) * (tanX * tanX))) +
                 ((cscX + Math.pow(Math.pow(Math.pow(secX, 3), 3), 2)) + (tanX + cscX)))) +
@@ -43,9 +51,7 @@ public class SystemFunction {
                 (cotX - sinX)))), 2);
     }
 
-    private double calculateLogarifmic(double x, int terms) {
-        Ln ln = new Ln();
-        Log log = new Log(ln);
+    private double calculateLogarifmic(double x) {
         double log5X = log.calculate(x, 5);
         double log10X = log.calculate(x, 10);
         double log3X = log.calculate(x, 3);

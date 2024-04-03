@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CotTest {
 
-    private static Double DEFAULT_ACCURACY = 0.000001;
+    private static final Double DEFAULT_ACCURACY = 0.000001;
 
     private Tan tan;
     private Cot cot;
@@ -30,7 +30,7 @@ public class CotTest {
     void cotTest(double x, double y) throws IOException {
         Mockito.when(tan.calculate(x)).thenReturn(
                 ArgumentsProvider.getTestedValue(
-                        "/Users/bekmvlad27/Desktop/study/TPO/tpo_lab2/src/test/resources/trigonometry/tan.csv", x
+                        "trigonometry/tan.csv", x
                 )
         );
         assertEquals(y, cot.calculate(x), DEFAULT_ACCURACY);
