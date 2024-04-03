@@ -42,13 +42,19 @@ public class SystemFunction {
         double tanX = tan.calculate(x);
         double cotX = cot.calculate(x);
 
-        return Math.pow((((((((((((((((secX + cosX) / cscX) * cscX) * cotX) + cscX) * tanX) / sinX) - cotX) * (sinX / sinX)) / secX) * (tanX * tanX))) +
-                ((cscX + Math.pow(Math.pow(Math.pow(secX, 3), 3), 2)) + (tanX + cscX)))) +
-                (cosX * ((cotX * tanX) * (sinX - cscX)))), 2) * Math.pow(((cotX * (Math.pow(secX, 2) * (((cotX + ((sinX / (secX + cosX))) - (cscX + secX))) * cotX) + sinX))) -
-                (Math.pow(sinX, 2)), 2) * Math.pow(((((((Math.pow((cosX - cosX), 2) - sinX) - (cscX * (cscX - (secX - cosX))))) *
-                ((cosX / Math.pow(cosX, 3)) + ((secX * cosX) + (cosX - ((cosX / (cscX + cosX))) / (cscX / sinX))))))) *
-                ((cosX * ((cscX + (sinX / secX))) - cotX) - secX), 2) * Math.pow(((sinX + (((cosX * (cosX / ((tanX * cotX) / cosX)))) * ((secX + ((cscX + cosX)) - secX)) -
-                (cotX - sinX)))), 2);
+//        return Math.pow((((((((((((((((secX + cosX) / cscX) * cscX) * cotX) + cscX) * tanX) / sinX) - cotX) * (sinX
+//        / sinX)) / secX) * (tanX * tanX))) +
+//                ((cscX + Math.pow(Math.pow(Math.pow(secX, 3), 3), 2)) + (tanX + cscX)))) +
+//                (cosX * ((cotX * tanX) * (sinX - cscX)))), 2) * Math.pow(((cotX * (Math.pow(secX, 2) * (((cotX + (
+//                (sinX / (secX + cosX))) - (cscX + secX))) * cotX) + sinX))) -
+//                (Math.pow(sinX, 2)), 2) * Math.pow(((((((Math.pow((cosX - cosX), 2) - sinX) - (cscX * (cscX - (secX
+//                - cosX))))) *
+//                ((cosX / Math.pow(cosX, 3)) + ((secX * cosX) + (cosX - ((cosX / (cscX + cosX))) / (cscX / sinX)))))
+//                )) *
+//                ((cosX * ((cscX + (sinX / secX))) - cotX) - secX), 2) * Math.pow(((sinX + (((cosX * (cosX / ((tanX 
+//                * cotX) / cosX)))) * ((secX + ((cscX + cosX)) - secX)) -
+//                (cotX - sinX)))), 2);
+        return (((Math.pow((((((((((((((secX + cosX) / cscX) * cscX) * cotX) + cscX) * tanX) / sinX) - cotX) * (sinX / sinX)) / secX) * (tanX * tanX)) + ((cscX + Math.pow(Math.pow(Math.pow(secX, 3), 3),2)) + (tanX + cscX))) + (cosX * ((cotX * tanX) * (sinX - cscX)))),2) * ((cotX * (Math.pow(secX, 2) * (((cotX + ((sinX / (secX + cosX)) - (cscX + secX))) * cotX) + sinX))) - Math.pow(sinX, 2))) * ((((Math.pow((cosX - cosX), 2) - sinX) - (cscX * (cscX - (secX - cosX)))) * ((cosX / (Math.pow(cosX, 3))) + ((secX * cosX) + (cosX - ((cosX / (cscX + cosX)) / (cscX / sinX)))))) * ((cosX * ((cscX + (sinX / secX)) - cotX)) - secX))) + ((sinX + (Math.pow(((cosX * (cosX / ((tanX * cotX) / cosX))) * ((secX + ((cscX + cosX) - secX)) - (cotX - sinX))), 2))) + cscX));
     }
 
     private double calculateLogarifmic(double x) {
