@@ -45,6 +45,34 @@ public class SystemFunctionTest {
 
     }
 
+    @BeforeEach
+    public void init1() {
+        this.sin = Mockito.mock(Sin.class);
+        this.cos = Mockito.mock(Cos.class);
+//        this.sec = Mockito.mock(Sec.class);
+        this.csc = Mockito.mock(Csc.class);
+//        this.tan = Mockito.mock(Tan.class);
+//        this.cot = Mockito.mock(Cot.class);
+        this.ln = Mockito.mock(Ln.class);
+//        this.log = Mockito.mock(Log.class);
+        this.systemFunction = new SystemFunction(sin, cos, sec, csc, tan, cot, ln, log);
+
+    }
+
+    @BeforeEach
+    public void init2() {
+        this.sin = Mockito.mock(Sin.class);
+//        this.cos = Mockito.mock(Cos.class);
+//        this.sec = Mockito.mock(Sec.class);
+//        this.csc = Mockito.mock(Csc.class);
+//        this.tan = Mockito.mock(Tan.class);
+//        this.cot = Mockito.mock(Cot.class);
+        this.ln = Mockito.mock(Ln.class);
+//        this.log = Mockito.mock(Log.class);
+        this.systemFunction = new SystemFunction(sin, cos, sec, csc, tan, cot, ln, log);
+
+    }
+
 
     @ParameterizedTest
     @CsvFileSource(resources = "/system_function.csv")

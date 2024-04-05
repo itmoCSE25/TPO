@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        final double start = -2;
-        final double end = 2;
+        final double start = -10;
+        final double end = 10;
         final double step = 0.1;
 
         WriteCSV csvWriter = new WriteCSV();
