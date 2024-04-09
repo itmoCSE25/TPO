@@ -19,8 +19,7 @@ import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SystemFunctionTest {
-
+public class SystemFunctionMiddleMockTest {
     private Sin sin;
     private Cos cos;
     private Sec sec;
@@ -35,47 +34,18 @@ public class SystemFunctionTest {
     public void init() {
         this.sin = Mockito.mock(Sin.class);
         this.cos = Mockito.mock(Cos.class);
-        this.sec = Mockito.mock(Sec.class);
         this.csc = Mockito.mock(Csc.class);
-        this.tan = Mockito.mock(Tan.class);
-        this.cot = Mockito.mock(Cot.class);
+        this.sec = new Sec(cos);
+        this.tan = new Tan(sin);
+        this.cot = new Cot(tan);
         this.ln = Mockito.mock(Ln.class);
-        this.log = Mockito.mock(Log.class);
+        this.log = new Log(ln);
         this.systemFunction = new SystemFunction(sin, cos, sec, csc, tan, cot, ln, log);
-
-    }
-
-    @BeforeEach
-    public void init1() {
-        this.sin = Mockito.mock(Sin.class);
-        this.cos = Mockito.mock(Cos.class);
-//        this.sec = Mockito.mock(Sec.class);
-        this.csc = Mockito.mock(Csc.class);
-//        this.tan = Mockito.mock(Tan.class);
-//        this.cot = Mockito.mock(Cot.class);
-        this.ln = Mockito.mock(Ln.class);
-//        this.log = Mockito.mock(Log.class);
-        this.systemFunction = new SystemFunction(sin, cos, sec, csc, tan, cot, ln, log);
-
-    }
-
-    @BeforeEach
-    public void init2() {
-        this.sin = Mockito.mock(Sin.class);
-//        this.cos = Mockito.mock(Cos.class);
-//        this.sec = Mockito.mock(Sec.class);
-//        this.csc = Mockito.mock(Csc.class);
-//        this.tan = Mockito.mock(Tan.class);
-//        this.cot = Mockito.mock(Cot.class);
-        this.ln = Mockito.mock(Ln.class);
-//        this.log = Mockito.mock(Log.class);
-        this.systemFunction = new SystemFunction(sin, cos, sec, csc, tan, cot, ln, log);
-
     }
 
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/system_function.csv")
+    @CsvFileSource(resources = "/system_function_middle.csv")
     void systemFunctionTest(double x, double y) throws IOException {
         if (x > 0) {
             mockLogarithmic(x);
@@ -93,32 +63,14 @@ public class SystemFunctionTest {
         Mockito.when(cos.calculate(x)).thenReturn(ArgumentsProvider.getTestedValue(
                 basePath + "cos.csv", x
         ));
-        Mockito.when(sec.calculate(x)).thenReturn(ArgumentsProvider.getTestedValue(
-                basePath + "sec.csv", x
-        ));
         Mockito.when(csc.calculate(x)).thenReturn(ArgumentsProvider.getTestedValue(
                 basePath + "csc.csv", x
-        ));
-        Mockito.when(tan.calculate(x)).thenReturn(ArgumentsProvider.getTestedValue(
-                basePath + "tan.csv", x
-        ));
-        Mockito.when(cot.calculate(x)).thenReturn(ArgumentsProvider.getTestedValue(
-                basePath + "cot.csv", x
         ));
     }
 
     private void mockLogarithmic(double x) throws IOException {
         Mockito.when(ln.calculate(x)).thenReturn(ArgumentsProvider.getTestedValue(
                 "logarithmic/ln.csv", x
-        ));
-        Mockito.when(log.calculate(x, 3)).thenReturn(ArgumentsProvider.getTestedValue(
-                "logarithmic/log_3.csv", x
-        ));
-        Mockito.when(log.calculate(x, 5)).thenReturn(ArgumentsProvider.getTestedValue(
-                "logarithmic/log_5.csv", x
-        ));
-        Mockito.when(log.calculate(x, 10)).thenReturn(ArgumentsProvider.getTestedValue(
-                "logarithmic/log_10.csv", x
         ));
     }
 }
