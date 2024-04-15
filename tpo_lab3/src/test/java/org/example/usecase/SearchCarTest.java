@@ -20,17 +20,18 @@ public class SearchCarTest {
 
     @Test
     void searchCarTest() {
-        WebDriver webDriver = Utils.getChromeDriver();
-        webDriver.get(Utils.DEFAULT_URL + "/car");
-        wait10Sec(webDriver);
-        SearchCarPage searchCarPage = new SearchCarPage(webDriver);
-        searchCarPage.getInputField().sendKeys("Moscow");
-        wait10Sec(webDriver);
-        searchCarPage.getFirstElemInRowButton().click();
-        searchCarPage.getFindButton().click();
-        WebDriverWait driverWait = new WebDriverWait(webDriver, Duration.of(30, ChronoUnit.SECONDS));
-        WebElement some = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"main\"]/div/div/div/section/div/div/div/div[1]/div[1]/div")));
-        assertEquals("Moscow Domodedovo Airport", some.getText());
-        webDriver.quit();
+        Utils.getDrivers().forEach(webDriver -> {
+            webDriver.get(Utils.DEFAULT_URL + "/car");
+            wait10Sec(webDriver);
+            SearchCarPage searchCarPage = new SearchCarPage(webDriver);
+            searchCarPage.getInputField().sendKeys("Dubai");
+            wait10Sec(webDriver);
+            searchCarPage.getFirstElemInRowButton().click();
+            searchCarPage.getFindButton().click();
+            WebDriverWait driverWait = new WebDriverWait(webDriver, Duration.of(30, ChronoUnit.SECONDS));
+            WebElement some = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"main\"]/div/div/div/section/div/div/div/div[1]/div[1]/div")));
+            assertEquals("Moscow Domodedovo Airport", some.getText());
+            webDriver.quit();
+        });
     }
 }

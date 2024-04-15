@@ -20,25 +20,26 @@ public class LoginPageTest {
 
     @BeforeEach
     void init() {
-        Utils.prepareDrivers();
+
     }
 
     @Test
     void loginTest() {
-        WebDriver webDriver = Utils.getChromeDriver();
-        webDriver.manage().window().maximize();
-        //задержка на выполнение теста = 10 сек.
-        wait10Sec(webDriver);
-        webDriver.get("https://account.booking.com");
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.getEmailField().sendKeys("test-itmo@niuitmo.ru");
-        loginPage.getContinueButton().click();
-        loginPage.getPasswordField().sendKeys("Y4f-EjS-ipY-kPx");
-        loginPage.getSignInButton().click();
-        WebDriverWait driverWait = new WebDriverWait(webDriver, Duration.of(10, ChronoUnit.SECONDS));
-        WebElement some = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"b2indexPage\"]/div[3]/div/div/header/nav[1]/div[2]/div/span/button/span/div/div[2]/div[1]")));
-        assertEquals("Your account", some.getText());
-        webDriver.quit();
+        Utils.getDrivers().forEach(webDriver -> {
+            webDriver.manage().window().maximize();
+            //задержка на выполнение теста = 10 сек.
+            wait10Sec(webDriver);
+            webDriver.get("https://account.booking.com");
+            LoginPage loginPage = new LoginPage(webDriver);
+            loginPage.getEmailField().sendKeys("test-itmo@niuitmo.ru");
+            loginPage.getContinueButton().click();
+            loginPage.getPasswordField().sendKeys("Y4f-EjS-ipY-kPx");
+            loginPage.getSignInButton().click();
+            WebDriverWait driverWait = new WebDriverWait(webDriver, Duration.of(10, ChronoUnit.SECONDS));
+            WebElement some = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"b2indexPage\"]/div[3]/div/div/header/nav[1]/div[2]/div/span/button/span/div/div[2]/div[1]")));
+            assertEquals("Your account", some.getText());
+            webDriver.quit();
+        });
     }
 
     @Test
