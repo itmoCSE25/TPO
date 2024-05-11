@@ -26,6 +26,9 @@ public class LoginPage {
     @FindBy(xpath = "//*[@id=\"root\"]/div/div/div[2]/div[1]/div/div/div/div/div/div/div/form/div/div[2]/div/button")
     private WebElement signInButton;
 
+    @FindBy(xpath = "//*[@id=\"password-note\"]")
+    private WebElement errorMessage;
+
     public WebElement getEmailField() {
         return emailField;
     }
@@ -40,5 +43,13 @@ public class LoginPage {
 
     public WebElement getSignInButton() {
         return signInButton;
+    }
+
+    public WebDriver getWebDriver() {
+        return webDriver;
+    }
+
+    public WebElement getErrorMessage() {
+        return errorMessage;
     }
 }

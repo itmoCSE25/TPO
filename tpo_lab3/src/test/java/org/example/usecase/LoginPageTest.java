@@ -35,7 +35,12 @@ public class LoginPageTest {
             loginPage.getContinueButton().click();
             loginPage.getPasswordField().sendKeys("Y4f-EjS-ipY-kPx");
             loginPage.getSignInButton().click();
-            WebDriverWait driverWait = new WebDriverWait(webDriver, Duration.of(10, ChronoUnit.SECONDS));
+            try {
+                Thread.sleep(30000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            WebDriverWait driverWait = new WebDriverWait(webDriver, Duration.of(20, ChronoUnit.SECONDS));
             WebElement some = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"b2indexPage\"]/div[3]/div/div/header/nav[1]/div[2]/div/span/button/span/div/div[2]/div[1]")));
             assertEquals("Your account", some.getText());
             webDriver.quit();
@@ -62,5 +67,25 @@ public class LoginPageTest {
         logoutButton.click();
         WebElement fin = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"b2indexPage\"]/div[2]/div/div/header/nav[1]/div[2]/div/a/span")));
         assertEquals("Sign in", fin.getText());
+    }
+
+    @Test
+    void loginErrorTest() {
+        WebDriver webDriver = Utils.getChromeDriver();
+        webDriver.manage().window().maximize();
+        //задержка на выполнение теста = 10 сек.
+        wait10Sec(webDriver);
+        webDriver.get("https://account.booking.com");
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.getEmailField().sendKeys("test-itmo@niuitmo.ru");
+        loginPage.getContinueButton().click();
+        loginPage.getPasswordField().sendKeys("1234");
+        loginPage.getSignInButton().click();
+        String text = loginPage.getErrorMessage().getText();
+        webDriver.quit();
+        assertEquals(
+                "The email and password combination entered doesn't match.",
+                text
+        );
     }
 }

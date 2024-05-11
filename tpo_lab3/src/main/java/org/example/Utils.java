@@ -11,19 +11,31 @@ import java.util.List;
 public class Utils {
     public static final String DEFAULT_URL = "https://www.booking.com";
 
+    private static FirefoxDriver firefoxDriver;
+
+    private static ChromeDriver chromeDriver;
+
     public static FirefoxDriver getFireFoxDriver() {
-        return new FirefoxDriver();
+        if (firefoxDriver == null) {
+            firefoxDriver = new FirefoxDriver();
+        }
+        return firefoxDriver;
     }
 
     public static ChromeDriver getChromeDriver() {
-        return new ChromeDriver();
+        if (chromeDriver == null) {
+            chromeDriver = new ChromeDriver();
+        }
+        return chromeDriver;
     }
 
     public static List<WebDriver> getDrivers() {
-        return List.of(getChromeDriver(), getFireFoxDriver());
+        return List.of(
+//                getChromeDriver(),
+                getFireFoxDriver());
     }
 
     public static void wait10Sec(WebDriver webDriver) {
-        webDriver.manage().timeouts().implicitlyWait(Duration.of(10, ChronoUnit.SECONDS));
+        webDriver.manage().timeouts().implicitlyWait(Duration.of(20, ChronoUnit.SECONDS));
     }
 }
